@@ -1,10 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.0;
 
-import "./token/Safemoon/Safemoon.sol";
+import "./token/BEP20/BEP20.sol";
 
-contract Token is Safemoon {
-    constructor() public {
-        _initialize("SafeGiva", "SFGIVA", 18, 1 * 10**9 * 10**18, false);
+contract Token is BEP20 {
+    constructor() {
+        _initialize(
+            "SafeGiva",
+            "SFGIVA",
+            9,
+            200000 * 10**9,
+            false
+        );
     }
 }

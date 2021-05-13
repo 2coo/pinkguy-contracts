@@ -44,7 +44,7 @@ contract BEP20 is Context, IBEP20, Ownable {
     string private _name;
     string private _symbol;
     uint8 private _decimals;
-    bool private _mintable;
+    bool private _mintable = false;
 
     /**
      * @dev sets initials supply and the owner
@@ -60,8 +60,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         _symbol = tokenSymbol;
         _decimals = tokenDecimals;
         _mintable = tokenMintable;
-        _totalSupply = tokenAmount;
-        _mint(owner(), _totalSupply);
+        _mint(owner(), tokenAmount);
     }
 
     /**
