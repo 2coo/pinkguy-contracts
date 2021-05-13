@@ -29,8 +29,8 @@ contract Safemoon is BEP20 {
     uint256 public _liquidityFee = 5;
     uint256 private _previousLiquidityFee = _liquidityFee;
 
-    IUniswapV2Router02 public immutable uniswapV2Router;
-    address public immutable uniswapV2Pair;
+    IUniswapV2Router02 public uniswapV2Router;
+    address public uniswapV2Pair;
 
     bool inSwapAndLiquify;
     bool public swapAndLiquifyEnabled = true;
@@ -53,19 +53,18 @@ contract Safemoon is BEP20 {
     }
 
     function _initialize(
-        string memory tokenName,
-        string memory tokenSymbol,
-        uint8 tokenDecimals,
-        uint256 tokenAmount,
-        bool tokenMintable
+        string memory name_,
+        string memory symbol_,
+        uint8 decimals_,
+        uint256 totalSupply_,
+        bool mintable_
     ) internal override {
-        _tTotal = tokenAmount;
+        _tTotal = totalSupply_;
         _rTotal = (MAX - (MAX % _tTotal));
         _rOwned[_msgSender()] = _rTotal;
-
-        // Pancakeswap V2 Router Mainnet
+        // Pancakeswap V2 Router Testnet
         IUniswapV2Router02 _uniswapV2Router =
-            IUniswapV2Router02(0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F);
+            IUniswapV2Router02(0xD99D1c33F9fC3444f8101754aBC46c52416550D1);
         // Create a uniswap pair for this new token
         uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
@@ -76,13 +75,9 @@ contract Safemoon is BEP20 {
         //exclude owner and this contract from fee
         _isExcludedFromFee[owner()] = true;
         _isExcludedFromFee[address(this)] = true;
-        BEP20._initialize(
-            tokenName,
-            tokenSymbol,
-            tokenDecimals,
-            _tTotal,
-            tokenMintable
-        );
+        _initialize(name_, symbol_, decimals_, totalSupply_, mintable_);
+
+        emit Transfer(address(0), _msgSender(), _tTotal);
     }
 
     function totalSupply() public view override returns (uint256) {

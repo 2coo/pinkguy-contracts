@@ -55,7 +55,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         uint8 tokenDecimals,
         uint256 tokenAmount,
         bool tokenMintable
-    ) internal {
+    ) internal virtual {
         _name = tokenName;
         _symbol = tokenSymbol;
         _decimals = tokenDecimals;
@@ -101,14 +101,20 @@ contract BEP20 is Context, IBEP20, Ownable {
     /**
      * @dev See {BEP20-totalSupply}.
      */
-    function totalSupply() public view override returns (uint256) {
+    function totalSupply() public view virtual override returns (uint256) {
         return _totalSupply;
     }
 
     /**
      * @dev See {BEP20-balanceOf}.
      */
-    function balanceOf(address account) public view override returns (uint256) {
+    function balanceOf(address account)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
         return _balances[account];
     }
 
@@ -122,6 +128,7 @@ contract BEP20 is Context, IBEP20, Ownable {
      */
     function transfer(address recipient, uint256 amount)
         public
+        virtual
         override
         returns (bool)
     {
@@ -135,6 +142,7 @@ contract BEP20 is Context, IBEP20, Ownable {
     function allowance(address owner, address spender)
         public
         view
+        virtual
         override
         returns (uint256)
     {
@@ -150,6 +158,7 @@ contract BEP20 is Context, IBEP20, Ownable {
      */
     function approve(address spender, uint256 amount)
         public
+        virtual
         override
         returns (bool)
     {
@@ -173,7 +182,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         address sender,
         address recipient,
         uint256 amount
-    ) public override returns (bool) {
+    ) public virtual override returns (bool) {
         _transfer(sender, recipient, amount);
         _approve(
             sender,
@@ -279,7 +288,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         address sender,
         address recipient,
         uint256 amount
-    ) internal {
+    ) internal virtual {
         require(sender != address(0), "BEP20: transfer from the zero address");
         require(recipient != address(0), "BEP20: transfer to the zero address");
 
@@ -347,7 +356,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         address owner,
         address spender,
         uint256 amount
-    ) internal {
+    ) internal virtual {
         require(owner != address(0), "BEP20: approve from the zero address");
         require(spender != address(0), "BEP20: approve to the zero address");
 
