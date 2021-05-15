@@ -62,6 +62,8 @@ contract Safemoon is ERC20 {
         _tTotal = totalSupply_;
         _rTotal = (MAX - (MAX % _tTotal));
         _rOwned[_msgSender()] = _rTotal;
+        // Pancakeswap V2 Router Mainnet
+        // IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F);
         // Pancakeswap V2 Router Testnet
         IUniswapV2Router02 _uniswapV2Router =
             IUniswapV2Router02(0xD99D1c33F9fC3444f8101754aBC46c52416550D1);
