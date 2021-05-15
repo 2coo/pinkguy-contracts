@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.0;
 
-import "../BEP20/BEP20.sol";
+import "../ERC20/ERC20.sol";
 import "./IUniswapV2Router02.sol";
 import "./IUniswapV2Factory.sol";
 
-contract Safemoon is BEP20 {
+contract Safemoon is ERC20 {
     using SafeMath for uint256;
 
     mapping(address => uint256) private _rOwned;

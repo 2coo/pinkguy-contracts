@@ -6,10 +6,10 @@ import "./token/Safemoon/Safemoon.sol";
 contract Token is Safemoon {
     constructor() {
         _initialize(
-            "Safemoon",
-            "SAFEMOON",
+            "PinkGuy",
+            "PINKGUY",
             9,
-            10**15 * 10**9,
+            1000000000 * 10**6 * 10**9,
             false
         );
     }
