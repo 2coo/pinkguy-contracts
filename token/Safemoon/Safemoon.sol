@@ -78,8 +78,6 @@ contract Safemoon is ERC20 {
         _isExcludedFromFee[owner()] = true;
         _isExcludedFromFee[address(this)] = true;
         ERC20._initialize(name_, symbol_, decimals_, totalSupply_, mintable_);
-
-        emit Transfer(address(0), _msgSender(), _tTotal);
     }
 
     function totalSupply() public view override returns (uint256) {
